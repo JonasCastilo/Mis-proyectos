@@ -1,11 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Seleccionamos todos los elementos que tengan la clase .nav-btn
     const navButtons = document.querySelectorAll('.nav-btn');
     const views = document.querySelectorAll('.view');
+    
+    // Elementos para el menú de celular
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.querySelector('.nav-links');
 
+    // Abrir/Cerrar menú en celular
+    mobileMenu.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Lógica de las vistas (SPA)
     navButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            // Permitimos la descarga si el botón tiene el atributo 'download'
             if(button.hasAttribute('download')) return;
             
             e.preventDefault(); 
@@ -18,20 +26,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 view.classList.remove('active');
             });
 
-            // Quitar el color de todos los enlaces del menú
+            // Quitar resaltado de botones
             document.querySelectorAll('.nav-links .nav-btn').forEach(btn => {
                 btn.classList.remove('active-link');
             });
 
-            // Mostrar la vista seleccionada
+            // Mostrar vista seleccionada
             const targetView = document.getElementById(targetId);
             if (targetView) {
                 targetView.classList.add('active');
             }
 
-            // Resaltar en el menú si el clic vino de ahí
             if(button.closest('.nav-links')){
                 button.classList.add('active-link');
+            }
+
+            // Cerrar el menú de celular automáticamente al elegir una opción
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
             }
         });
     });

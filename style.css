@@ -210,3 +210,66 @@ nav {
     margin-bottom: 5px;
     font-size: 1.1rem;
 }
+/* ---------------------------------
+   ADAPTACIÓN PARA CELULARES (RESPONSIVE)
+----------------------------------- */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    /* Mostrar botón hamburguesa y ocultar menú horizontal */
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 70px;
+        left: -100%;
+        flex-direction: column;
+        background: var(--nav-bg);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s ease;
+        padding: 20px 0;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.3);
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    /* Reducir tamaños de texto y espaciados */
+    .hero h1 { font-size: 2.5rem; }
+    .text-large { font-size: 1.3rem; margin-bottom: 15px; }
+    .hero p { font-size: 1rem; }
+    
+    .view { padding: 90px 15px 15px; }
+    
+    .project-detail {
+        padding: 25px 20px;
+        max-height: 85vh;
+    }
+
+    .project-detail h2 { font-size: 1.8rem; margin-bottom: 15px; }
+    
+    .project-perspective, .project-steps li {
+        font-size: 0.95rem;
+    }
+
+    /* Forzar que las fotos/videos se pongan uno sobre otro en celular */
+    .media-gallery {
+        grid-template-columns: 1fr;
+    }
+}
