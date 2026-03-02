@@ -15,7 +15,8 @@
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    overflow: hidden; 
+    /* Cambio clave para móviles: permite scroll hacia abajo si es necesario */
+    overflow-x: hidden; 
 }
 
 /* Navegación */
@@ -81,8 +82,8 @@ nav {
 /* LÓGICA DE VISTAS (SPA) */
 .view {
     display: none; 
-    height: 100vh;
-    padding: 100px 20px 20px;
+    min-height: 100vh;
+    padding: 100px 20px 50px;
     animation: fadeIn 0.4s ease-out forwards;
 }
 
@@ -90,6 +91,7 @@ nav {
     display: flex; 
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 @keyframes fadeIn {
@@ -116,12 +118,7 @@ nav {
     max-width: 850px;
     width: 100%;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-    max-height: 80vh;
-    overflow-y: auto;
 }
-
-.project-detail::-webkit-scrollbar { width: 8px; }
-.project-detail::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
 
 .in-progress-view .project-detail { border-top: 3px solid #ffaa00; }
 
@@ -174,23 +171,23 @@ nav {
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .mb-20 { margin-bottom: 20px; }
-/* ---------------------------------
-   GALERÍA MULTIMEDIA Y TIMELINE
------------------------------------ */
+
+/* GALERÍA MULTIMEDIA Y TIMELINE */
 .media-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .project-media {
     width: 100%;
     height: 250px;
-    object-fit: cover; /* Asegura que la imagen/video no se deforme */
+    object-fit: cover;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: #111a24; /* Fondo oscuro por si el video tarda en cargar */
+    background-color: #111a24;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -199,17 +196,14 @@ nav {
     box-shadow: 0 5px 20px rgba(0, 240, 255, 0.2);
 }
 
-/* Estilo para la evolución del proyecto */
-.timeline li {
-    margin-bottom: 20px;
-}
-
+.timeline li { margin-bottom: 20px; }
 .timeline strong {
     color: var(--accent-color);
     display: block;
     margin-bottom: 5px;
     font-size: 1.1rem;
 }
+
 /* ---------------------------------
    ADAPTACIÓN PARA CELULARES (RESPONSIVE)
 ----------------------------------- */
@@ -228,14 +222,18 @@ nav {
 }
 
 @media (max-width: 768px) {
-    /* Mostrar botón hamburguesa y ocultar menú horizontal */
-    .menu-toggle {
-        display: flex;
-    }
+    /* Barra de navegación */
+    nav { padding: 15px 20px; }
+    
+    .logo { font-size: 1.2rem; }
 
+    /* Mostrar botón hamburguesa */
+    .menu-toggle { display: flex; }
+
+    /* Menú desplegable */
     .nav-links {
         position: absolute;
-        top: 70px;
+        top: 60px;
         left: -100%;
         flex-direction: column;
         background: var(--nav-bg);
@@ -244,32 +242,26 @@ nav {
         transition: 0.3s ease;
         padding: 20px 0;
         box-shadow: 0 10px 10px rgba(0,0,0,0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .nav-links.active {
-        left: 0;
-    }
+    .nav-links.active { left: 0; }
 
-    /* Reducir tamaños de texto y espaciados */
-    .hero h1 { font-size: 2.5rem; }
-    .text-large { font-size: 1.3rem; margin-bottom: 15px; }
+    .nav-links li { padding: 15px 0; }
+
+    /* Reducir textos */
+    .hero h1 { font-size: 2.2rem; }
+    .text-large { font-size: 1.2rem; }
     .hero p { font-size: 1rem; }
     
-    .view { padding: 90px 15px 15px; }
+    .view { padding: 100px 15px 30px; }
     
-    .project-detail {
-        padding: 25px 20px;
-        max-height: 85vh;
-    }
-
-    .project-detail h2 { font-size: 1.8rem; margin-bottom: 15px; }
+    .project-detail { padding: 25px 20px; }
+    .project-detail h2 { font-size: 1.6rem; }
     
-    .project-perspective, .project-steps li {
-        font-size: 0.95rem;
-    }
+    .project-perspective, .project-steps li { font-size: 0.95rem; }
 
-    /* Forzar que las fotos/videos se pongan uno sobre otro en celular */
-    .media-gallery {
-        grid-template-columns: 1fr;
-    }
+    /* Galería en vertical */
+    .media-gallery { grid-template-columns: 1fr; }
+    .project-media { height: 200px; }
 }
